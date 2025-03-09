@@ -10,7 +10,7 @@ import org.springframework.data.annotation.Id;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "issues")
+@Table(name = "issue")
 @Getter
 @Setter
 @NoArgsConstructor
