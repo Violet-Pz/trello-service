@@ -7,8 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TrelloApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(TrelloApplication.class, args);
         System.out.print("Starting...");
+        SpringApplication.run(TrelloApplication.class, args);
+        System.out.print("Trello Service Started.");
     }
 
 }

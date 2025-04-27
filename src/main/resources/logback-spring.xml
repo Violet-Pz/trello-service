@@ -3,7 +3,7 @@
     <!-- 控制台日志格式 -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] [%level] %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
 
@@ -15,11 +15,25 @@
         <!-- 滚动策略：每天新建一个日志文件 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>logs/trello-app-%d{yyyy-MM-dd}.log</fileNamePattern>
-            <maxHistory>14</maxHistory>  <!-- 最多保留30天的日志 -->
+            <maxHistory>1</maxHistory>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
         </rollingPolicy>
 
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] [%level] %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- WARN 和 ERROR 级别日志的专门输出到另一个文件 -->
+    <appender name="INFO_FILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/warn_error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/warn_error-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>14</maxHistory>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] [%level] %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
 
@@ -32,4 +46,9 @@
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE"/>
     </root>
+
+    <!-- 配置专门输出 INFO 日志的 logger -->
+    <logger name="com.tsukilaw.trello" level="INFO">
+        <appender-ref ref="IN¬FO_FILE"/>
+    </logger>
 </configuration>
