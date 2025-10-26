@@ -1,7 +1,9 @@
 package com.tsukilaw.trello.controller;
 
 import com.tsukilaw.trello.entity.Issue;
+import com.tsukilaw.trello.entity.IssueStatus;
 import com.tsukilaw.trello.service.IssueService;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +41,16 @@ public class IssueController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND) // 如果没有找到，返回 404
                     .body(null);
         }
+    }
+
+    @GetMapping("/status/{status}")
+    public ResponseEntity<List<Issue>> getIssuesByStatus(@PathVariable @Parameter(description = "Allowed values: TODO, ANALYZING, IN_PROGRESS, DONE") String status) {
+        if (!List.of("TODO", "ANALYZING", "IN_PROGRESS", "DONE").contains(status)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(null); // Return 400 Bad Request if the status is invalid
+        }
+        List<Issue> issues = issueService.getIssuesByStatus(Enum.valueOf(IssueStatus.class, status));
+        return ResponseEntity.ok(issues);
     }
 
     @GetMapping
