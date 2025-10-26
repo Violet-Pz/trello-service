@@ -1,5 +1,6 @@
-INSERT INTO ISSUE (title, description, status, createdAt, updatedAt)
+INSERT INTO issue (id, title, description, status, created_at, updated_at)
 VALUES
-    ('Issue 1', 'This is the description for Issue 1', 'OPEN', NOW(), NOW()),
-    ('Issue 2', 'This is the description for Issue 2', 'IN_PROGRESS', NOW(), NOW()),
-    ('Issue 3', 'This is the description for Issue 3', 'CLOSED', NOW(), NOW());
+    (1, 'Fix login bug', 'Users cannot log in with valid credentials', 'TODO', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (2, 'Add search functionality', 'Implement search feature for tasks', 'IN_PROGRESS', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (3, 'Update UI design', 'Redesign the dashboard for better user experience', 'ANALYZING', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (4, 'Write unit tests', 'Add unit tests for the service layer', 'DONE', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
