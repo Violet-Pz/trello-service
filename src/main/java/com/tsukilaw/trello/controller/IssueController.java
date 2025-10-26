@@ -53,8 +53,14 @@ public class IssueController {
         return ResponseEntity.ok(issues);
     }
 
-    @GetMapping
+    @GetMapping("/getAll")
     public ResponseEntity<List<Issue>> getAllIssues() {
         return ResponseEntity.ok(issueService.getIssues());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteIssue(@PathVariable Long id) {
+        issueService.deleteIssueById(id);
+        return ResponseEntity.noContent().build();
     }
 }
