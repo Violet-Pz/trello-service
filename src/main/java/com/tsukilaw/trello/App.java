@@ -4,11 +4,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TrelloApplication {
+public class App {
 
     public static void main(String[] args) {
         System.out.print("Starting...");
-        SpringApplication.run(TrelloApplication.class, args);
+        SpringApplication.run(App.class, args);
         System.out.print("Trello Service Started.");
     }
 
